@@ -1,4 +1,5 @@
 import { EncryptedDataForm } from '@/components/EncryptedDataForm';
+import { FHETestComponent } from '@/components/FHETestComponent';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Lock, Key, Shield, Eye, Database, Zap } from 'lucide-react';
@@ -135,6 +136,9 @@ export default function EncryptedDataPage() {
             On-Chain
           </Badge>
         </div>
+
+        {/* FHE Test Component */}
+        <FHETestComponent />
 
         {/* Main Form */}
         <EncryptedDataForm />

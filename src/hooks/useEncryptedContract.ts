@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useAccount, useContractWrite, useWaitForTransaction } from 'wagmi';
+import { useAccount, useWriteContract, useWaitForTransactionReceipt } from 'wagmi';
 import { CipherLendABI } from '../lib/contract';
 import { 
   encryptNumber, 
@@ -30,10 +30,7 @@ export function useEncryptedContract() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Create encrypted loan
-  const { write: createLoan, data: createLoanData } = useContractWrite({
-    address: import.meta.env.VITE_CONTRACT_ADDRESS as `0x${string}`,
-    abi: CipherLendABI,
-    functionName: 'createLoan',
+  const { writeContract: createLoan, data: createLoanData } = useWriteContract({
     onSuccess: () => {
       toast.success('Encrypted loan data submitted to blockchain');
     },
@@ -43,10 +40,7 @@ export function useEncryptedContract() {
   });
 
   // Add encrypted liquidity
-  const { write: addLiquidity, data: addLiquidityData } = useContractWrite({
-    address: import.meta.env.VITE_CONTRACT_ADDRESS as `0x${string}`,
-    abi: CipherLendABI,
-    functionName: 'addLiquidity',
+  const { writeContract: addLiquidity, data: addLiquidityData } = useWriteContract({
     onSuccess: () => {
       toast.success('Encrypted liquidity data submitted to blockchain');
     },
@@ -56,16 +50,16 @@ export function useEncryptedContract() {
   });
 
   // Wait for transaction confirmation
-  const { isLoading: isCreatingLoan } = useWaitForTransaction({
-    hash: createLoanData?.hash,
+  const { isLoading: isCreatingLoan } = useWaitForTransactionReceipt({
+    hash: createLoanData,
     onSuccess: () => {
       setIsSubmitting(false);
       toast.success('Encrypted loan created successfully!');
     }
   });
 
-  const { isLoading: isAddingLiquidity } = useWaitForTransaction({
-    hash: addLiquidityData?.hash,
+  const { isLoading: isAddingLiquidity } = useWaitForTransactionReceipt({
+    hash: addLiquidityData,
     onSuccess: () => {
       setIsSubmitting(false);
       toast.success('Encrypted liquidity added successfully!');
@@ -83,26 +77,32 @@ export function useEncryptedContract() {
     setIsSubmitting(true);
 
     try {
+      const contractAddress = import.meta.env.VITE_CONTRACT_ADDRESS;
+      
       // Encrypt loan amount
-      const encryptedAmount = encryptNumber(loanData.amount);
-      const amountProof = generateFHEProof(loanData.amount);
+      const encryptedAmount = await encryptNumber(loanData.amount, contractAddress, address);
+      const amountProof = await generateFHEProof(loanData.amount, contractAddress, address);
       
       // Encrypt collateral amount
-      const encryptedCollateral = encryptNumber(loanData.collateralAmount);
-      const collateralProof = generateFHEProof(loanData.collateralAmount);
+      const encryptedCollateral = await encryptNumber(loanData.collateralAmount, contractAddress, address);
+      const collateralProof = await generateFHEProof(loanData.collateralAmount, contractAddress, address);
       
       // Generate risk assessment with FHE
-      const riskAssessment = assessRiskWithFHE(
+      const riskAssessment = await assessRiskWithFHE(
         loanData.collateralAmount,
         loanData.amount,
-        loanData.creditScore
+        loanData.creditScore,
+        contractAddress,
+        address
       );
       
       // Generate encrypted collateral data
-      const encryptedCollateralData = generateEncryptedCollateral(
+      const encryptedCollateralData = await generateEncryptedCollateral(
         loanData.collateralType,
         loanData.collateralAmount,
-        loanData.collateralLocation
+        loanData.collateralLocation,
+        contractAddress,
+        address
       );
 
       // Prepare encrypted data for blockchain
@@ -128,6 +128,9 @@ export function useEncryptedContract() {
 
       // Submit to blockchain
       createLoan({
+        address: import.meta.env.VITE_CONTRACT_ADDRESS as `0x${string}`,
+        abi: CipherLendABI,
+        functionName: 'createLoan',
         args: [poolId, encryptedAmountData, encryptedCollateralData_uint32, combinedProof]
       });
 
@@ -151,9 +154,11 @@ export function useEncryptedContract() {
     setIsSubmitting(true);
 
     try {
+      const contractAddress = import.meta.env.VITE_CONTRACT_ADDRESS;
+      
       // Encrypt liquidity amount
-      const encryptedAmount = encryptNumber(liquidityData.amount);
-      const amountProof = generateFHEProof(liquidityData.amount);
+      const encryptedAmount = await encryptNumber(liquidityData.amount, contractAddress, address);
+      const amountProof = await generateFHEProof(liquidityData.amount, contractAddress, address);
       
       // Prepare encrypted data for blockchain
       const encryptedAmountData = toExternalEuint32(liquidityData.amount);
@@ -174,6 +179,9 @@ export function useEncryptedContract() {
 
       // Submit to blockchain
       addLiquidity({
+        address: import.meta.env.VITE_CONTRACT_ADDRESS as `0x${string}`,
+        abi: CipherLendABI,
+        functionName: 'addLiquidity',
         args: [liquidityData.poolId, encryptedAmountData, proof],
         value: BigInt(liquidityData.amount * 1e18) // Convert to wei
       });
@@ -203,17 +211,19 @@ export function useEncryptedContract() {
     setIsEncrypting(true);
 
     try {
+      const contractAddress = import.meta.env.VITE_CONTRACT_ADDRESS;
+      
       // Encrypt risk data
-      const encryptedRiskScore = encryptNumber(riskScore);
-      const encryptedCreditScore = encryptNumber(creditScore);
-      const encryptedCollateralValue = encryptNumber(collateralValue);
-      const encryptedDebtRatio = encryptNumber(debtRatio);
+      const encryptedRiskScore = await encryptNumber(riskScore, contractAddress, address);
+      const encryptedCreditScore = await encryptNumber(creditScore, contractAddress, address);
+      const encryptedCollateralValue = await encryptNumber(collateralValue, contractAddress, address);
+      const encryptedDebtRatio = await encryptNumber(debtRatio, contractAddress, address);
 
       // Generate proofs
-      const riskProof = generateFHEProof(riskScore);
-      const creditProof = generateFHEProof(creditScore);
-      const collateralProof = generateFHEProof(collateralValue);
-      const debtProof = generateFHEProof(debtRatio);
+      const riskProof = await generateFHEProof(riskScore, contractAddress, address);
+      const creditProof = await generateFHEProof(creditScore, contractAddress, address);
+      const collateralProof = await generateFHEProof(collateralValue, contractAddress, address);
+      const debtProof = await generateFHEProof(debtRatio, contractAddress, address);
 
       // Combine all encrypted data
       const encryptedAssessment = {
