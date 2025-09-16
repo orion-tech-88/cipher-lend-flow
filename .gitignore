@@ -12,6 +12,33 @@ dist
 dist-ssr
 *.local
 
+# Environment variables and sensitive data
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.*.local
+
+# Contract deployment artifacts
+contract-address.json
+deployments/
+artifacts/
+cache/
+
+# Private keys and sensitive files
+*.pem
+*.key
+*.p12
+*.pfx
+private-keys/
+secrets/
+
+# IDE and editor files
+.vscode/settings.json
+.vscode/launch.json
+.vscode/tasks.json
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

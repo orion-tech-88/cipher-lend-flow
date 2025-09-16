@@ -36,9 +36,9 @@ Add the following environment variables in the Vercel dashboard:
 
 ```
 VITE_CHAIN_ID=11155111
-VITE_RPC_URL=https://sepolia.infura.io/v3/b18fb7e6ca7045ac83c41157ab93f990
-VITE_WALLET_CONNECT_PROJECT_ID=2ec9743d0d0cd7fb94dee1a7e6d33475
-VITE_INFURA_API_KEY=b18fb7e6ca7045ac83c41157ab93f990
+VITE_RPC_URL=https://sepolia.infura.io/v3/YOUR_INFURA_PROJECT_ID
+VITE_WALLET_CONNECT_PROJECT_ID=YOUR_WALLET_CONNECT_PROJECT_ID
+VITE_INFURA_API_KEY=YOUR_INFURA_API_KEY
 VITE_FHE_NETWORK_URL=https://devnet.zama.ai
 VITE_CONTRACT_ADDRESS=YOUR_DEPLOYED_CONTRACT_ADDRESS
 VITE_APP_NAME=CipherLend
@@ -65,9 +65,9 @@ VITE_APP_DESCRIPTION=Privacy-first DeFi lending protocol with encrypted collater
 | Variable | Description | Example Value |
 |----------|-------------|---------------|
 | `VITE_CHAIN_ID` | Ethereum chain ID | `11155111` (Sepolia) |
-| `VITE_RPC_URL` | RPC endpoint URL | `https://sepolia.infura.io/v3/...` |
-| `VITE_WALLET_CONNECT_PROJECT_ID` | WalletConnect project ID | `2ec9743d0d0cd7fb94dee1a7e6d33475` |
-| `VITE_INFURA_API_KEY` | Infura API key | `b18fb7e6ca7045ac83c41157ab93f990` |
+| `VITE_RPC_URL` | RPC endpoint URL | `https://sepolia.infura.io/v3/YOUR_INFURA_PROJECT_ID` |
+| `VITE_WALLET_CONNECT_PROJECT_ID` | WalletConnect project ID | `YOUR_WALLET_CONNECT_PROJECT_ID` |
+| `VITE_INFURA_API_KEY` | Infura API key | `YOUR_INFURA_API_KEY` |
 
 ### Optional Variables
 

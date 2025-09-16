@@ -8,8 +8,8 @@ async function main() {
 
   // Deploy the contract
   // You'll need to provide the risk assessor and verifier addresses
-  const riskAssessor = "0x742d35Cc6634C0532925a3b8D4C9db96C4b4d8b6"; // Replace with actual address
-  const verifier = "0x742d35Cc6634C0532925a3b8D4C9db96C4b4d8b6"; // Replace with actual address
+  const riskAssessor = process.env.RISK_ASSESSOR_ADDRESS || "0x0000000000000000000000000000000000000000"; // Replace with actual address
+  const verifier = process.env.VERIFIER_ADDRESS || "0x0000000000000000000000000000000000000000"; // Replace with actual address
 
   const cipherLend = await CipherLend.deploy(riskAssessor, verifier);
 
