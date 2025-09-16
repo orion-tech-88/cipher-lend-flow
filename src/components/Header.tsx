@@ -1,4 +1,4 @@
-import { Shield } from "lucide-react";
+import { Lock, Key } from "lucide-react";
 import { ConnectButton } from '@rainbow-me/rainbowkit';
 
 const Header = () => {
@@ -8,7 +8,10 @@ const Header = () => {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="flex items-center gap-2">
-              <Shield className="h-8 w-8 text-encrypted" />
+              <div className="relative">
+                <Lock className="h-8 w-8 text-primary" />
+                <Key className="h-4 w-4 text-encrypted absolute -top-1 -right-1" />
+              </div>
               <span className="text-xl font-bold bg-gradient-primary bg-clip-text text-transparent">
                 CipherLend
               </span>
@@ -24,6 +27,10 @@ const Header = () => {
             </a>
             <a href="/analytics" className="text-muted-foreground hover:text-foreground transition-smooth">
               Analytics
+            </a>
+            <a href="/encrypted-data" className="text-muted-foreground hover:text-foreground transition-smooth flex items-center gap-1">
+              <Lock className="h-4 w-4" />
+              Encrypt Data
             </a>
           </nav>
 

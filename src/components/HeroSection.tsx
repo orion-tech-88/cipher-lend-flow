@@ -51,9 +51,18 @@ const HeroSection = () => {
               variant="outline" 
               size="lg" 
               className="text-lg px-8 py-6 hover:bg-secondary transition-smooth"
-              onClick={() => navigate('/dashboard')}
+              onClick={() => navigate('/encrypted-data')}
             >
               <Lock className="mr-2 h-5 w-5" />
+              Encrypt Data
+            </Button>
+            <Button 
+              variant="outline" 
+              size="lg" 
+              className="text-lg px-8 py-6 hover:bg-secondary transition-smooth"
+              onClick={() => navigate('/dashboard')}
+            >
+              <Shield className="mr-2 h-5 w-5" />
               Explore Protocol
             </Button>
           </div>

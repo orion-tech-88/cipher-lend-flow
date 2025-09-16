@@ -9,6 +9,7 @@ import Pools from "./pages/Pools";
 import Analytics from "./pages/Analytics";
 import AddLiquidity from "./pages/AddLiquidity";
 import StartLending from "./pages/StartLending";
+import EncryptedData from "./pages/EncryptedData";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -26,6 +27,7 @@ const App = () => (
           <Route path="/analytics" element={<Analytics />} />
           <Route path="/add-liquidity" element={<AddLiquidity />} />
           <Route path="/start-lending" element={<StartLending />} />
+          <Route path="/encrypted-data" element={<EncryptedData />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
