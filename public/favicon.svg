@@ -1,19 +1,31 @@
 <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- Background circle -->
-  <circle cx="16" cy="16" r="16" fill="#1a1a1a"/>
+  <!-- Background -->
+  <rect width="32" height="32" rx="6" fill="#0f0f0f"/>
   
-  <!-- Lock icon -->
-  <path d="M12 12C12 9.79086 13.7909 8 16 8C18.2091 8 20 9.79086 20 12V14H21C21.5523 14 22 14.4477 22 15V23C22 23.5523 21.5523 24 21 24H11C10.4477 24 10 23.5523 10 23V15C10 14.4477 10.4477 14 11 14H12V12Z" 
-        fill="#3b82f6" 
-        stroke="#60a5fa" 
-        stroke-width="1"/>
+  <!-- Main Lock icon (matches Header design) -->
+  <g transform="translate(8, 8)">
+    <!-- Lock body -->
+    <path d="M4 4C4 1.79086 5.79086 0 8 0C10.2091 0 12 1.79086 12 4V6H13C13.5523 6 14 6.44772 14 7V15C14 15.5523 13.5523 16 13 16H3C2.44772 16 2 15.5523 2 15V7C2 6.44772 2.44772 6 3 6H4V4Z" 
+          fill="#3b82f6" 
+          stroke="#60a5fa" 
+          stroke-width="0.5"/>
+    
+    <!-- Lock hole -->
+    <circle cx="8" cy="9" r="1.5" fill="#0f0f0f"/>
+    <rect x="7.5" y="9" width="1" height="2" fill="#0f0f0f"/>
+  </g>
   
-  <!-- Key icon (smaller, positioned at top-right) -->
-  <path d="M24 8C24 6.89543 23.1046 6 22 6C20.8954 6 20 6.89543 20 8C20 9.10457 20.8954 10 22 10C23.1046 10 24 9.10457 24 8Z" 
-        fill="#8b5cf6"/>
-  <path d="M22 8L20 10L18 8L20 6L22 8Z" 
-        fill="#8b5cf6"/>
+  <!-- Key icon (positioned at top-right, matches Header positioning) -->
+  <g transform="translate(20, 4)">
+    <!-- Key head (circular) -->
+    <circle cx="2" cy="2" r="1.5" fill="#8b5cf6"/>
+    <!-- Key shaft -->
+    <rect x="0.5" y="1.5" width="3" height="1" fill="#8b5cf6"/>
+    <!-- Key teeth (simple design) -->
+    <rect x="3.5" y="1" width="0.8" height="2" fill="#8b5cf6"/>
+    <rect x="4.3" y="0.5" width="0.8" height="3" fill="#8b5cf6"/>
+  </g>
   
-  <!-- Lock hole -->
-  <circle cx="16" cy="17" r="2" fill="#1a1a1a"/>
+  <!-- Subtle border -->
+  <rect width="32" height="32" rx="6" fill="none" stroke="#1a1a1a" stroke-width="1"/>
 </svg>
