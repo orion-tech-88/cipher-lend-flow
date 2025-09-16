@@ -1,5 +1,4 @@
-// This would be the actual ABI generated from the compiled contract
-// For now, we'll create a simplified version
+// Updated ABI to match the simplified CipherLend contract
 export const CipherLendABI = [
   {
     "inputs": [
@@ -56,10 +55,10 @@ export const CipherLendABI = [
       {"internalType": "string", "name": "symbol", "type": "string"},
       {"internalType": "address", "name": "tokenAddress", "type": "address"},
       {"internalType": "address", "name": "poolManager", "type": "address"},
-      {"internalType": "uint8", "name": "totalLiquidity", "type": "uint8"},
-      {"internalType": "uint8", "name": "totalBorrowed", "type": "uint8"},
-      {"internalType": "uint8", "name": "interestRate", "type": "uint8"},
-      {"internalType": "uint8", "name": "collateralRatio", "type": "uint8"},
+      {"internalType": "uint256", "name": "totalLiquidity", "type": "uint256"},
+      {"internalType": "uint256", "name": "totalBorrowed", "type": "uint256"},
+      {"internalType": "uint256", "name": "interestRate", "type": "uint256"},
+      {"internalType": "uint256", "name": "collateralRatio", "type": "uint256"},
       {"internalType": "bool", "name": "isActive", "type": "bool"},
       {"internalType": "bool", "name": "isVerified", "type": "bool"},
       {"internalType": "uint256", "name": "createdAt", "type": "uint256"},
@@ -72,10 +71,10 @@ export const CipherLendABI = [
     "inputs": [{"internalType": "uint256", "name": "loanId", "type": "uint256"}],
     "name": "getLoanInfo",
     "outputs": [
-      {"internalType": "uint8", "name": "amount", "type": "uint8"},
-      {"internalType": "uint8", "name": "collateralAmount", "type": "uint8"},
-      {"internalType": "uint8", "name": "interestRate", "type": "uint8"},
-      {"internalType": "uint8", "name": "remainingAmount", "type": "uint8"},
+      {"internalType": "uint256", "name": "amount", "type": "uint256"},
+      {"internalType": "uint256", "name": "collateralAmount", "type": "uint256"},
+      {"internalType": "uint256", "name": "interestRate", "type": "uint256"},
+      {"internalType": "uint256", "name": "remainingAmount", "type": "uint256"},
       {"internalType": "bool", "name": "isActive", "type": "bool"},
       {"internalType": "bool", "name": "isLiquidated", "type": "bool"},
       {"internalType": "address", "name": "borrower", "type": "address"},
@@ -90,10 +89,10 @@ export const CipherLendABI = [
     "inputs": [{"internalType": "address", "name": "user", "type": "address"}],
     "name": "getRiskAssessment",
     "outputs": [
-      {"internalType": "uint8", "name": "riskScore", "type": "uint8"},
-      {"internalType": "uint8", "name": "creditScore", "type": "uint8"},
-      {"internalType": "uint8", "name": "collateralValue", "type": "uint8"},
-      {"internalType": "uint8", "name": "debtRatio", "type": "uint8"},
+      {"internalType": "uint256", "name": "riskScore", "type": "uint256"},
+      {"internalType": "uint256", "name": "creditScore", "type": "uint256"},
+      {"internalType": "uint256", "name": "collateralValue", "type": "uint256"},
+      {"internalType": "uint256", "name": "debtRatio", "type": "uint256"},
       {"internalType": "bool", "name": "isVerified", "type": "bool"},
       {"internalType": "address", "name": "assessor", "type": "address"},
       {"internalType": "uint256", "name": "timestamp", "type": "uint256"}
